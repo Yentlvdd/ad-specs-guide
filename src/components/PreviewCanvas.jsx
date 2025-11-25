@@ -15,20 +15,34 @@ export function PreviewCanvas({ children, platformName, specName, specDimensions
         if (!previewRef.current) return;
 
         setDownloading(true);
+        const originalZoom = zoom;
+
         try {
+            // Temporarily reset zoom to 100% for clean capture
+            setZoom(100);
+
+            // Wait for zoom transition to complete
+            await new Promise(resolve => setTimeout(resolve, 250));
+
             const canvas = await html2canvas(previewRef.current, {
-                scale: 2, // 2x resolution for Retina displays
+                scale: 3, // 3x resolution for ultra-high quality
                 backgroundColor: null,
                 logging: false,
-                useCORS: true
+                useCORS: true,
+                allowTaint: true
             });
 
             const link = document.createElement('a');
-            link.download = `${platformName}-${specName}-mockup.png`;
+            link.download = `${platformName.replace(/\s+/g, '-')}-${specName.replace(/\s+/g, '-')}-mockup.png`;
             link.href = canvas.toDataURL('image/png');
             link.click();
+
+            // Restore original zoom
+            setZoom(originalZoom);
         } catch (error) {
             console.error('Download failed:', error);
+            alert('Download failed. Please try again.');
+            setZoom(originalZoom);
         } finally {
             setDownloading(false);
         }
@@ -36,7 +50,20 @@ export function PreviewCanvas({ children, platformName, specName, specDimensions
 
     return (
         <div className="relative w-full h-full flex flex-col">
-            {/* Zoom Controls - Floating Toolbar */}
+            {/* Download Button - Top Right (Prominent) */}
+            <div className="absolute top-4 right-4 z-50">
+                <button
+                    onClick={handleDownload}
+                    disabled={downloading}
+                    className="flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg transition-all disabled:opacity-50 font-bold text-base shadow-xl hover:shadow-2xl transform hover:scale-105"
+                    title="Download as PNG (High Quality)"
+                >
+                    <Download className="w-5 h-5" />
+                    {downloading ? 'Downloading...' : 'Download PNG'}
+                </button>
+            </div>
+
+            {/* Zoom Controls - Bottom Right (Compact) */}
             <div className="absolute bottom-4 right-4 z-50 flex items-center gap-2 bg-white border rounded-lg shadow-lg p-2">
                 <button
                     onClick={handleZoomOut}
@@ -55,21 +82,13 @@ export function PreviewCanvas({ children, platformName, specName, specDimensions
                 >
                     <ZoomIn className="w-4 h-4" />
                 </button>
+                <div className="w-px h-6 bg-gray-300 mx-1" />
                 <button
                     onClick={handleFitScreen}
                     className="p-2 hover:bg-gray-100 rounded transition-colors"
                     title="Fit to Screen"
                 >
                     <Maximize2 className="w-4 h-4" />
-                </button>
-                <div className="w-px h-6 bg-gray-300 mx-1" />
-                <button
-                    onClick={handleDownload}
-                    disabled={downloading}
-                    className="p-2 hover:bg-primary/10 rounded transition-colors text-primary disabled:opacity-50"
-                    title="Download PNG"
-                >
-                    <Download className="w-4 h-4" />
                 </button>
             </div>
 
