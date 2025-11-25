@@ -79,7 +79,7 @@ export function AdCard({ spec, isSelected, onToggle }) {
                                 className="absolute top-0 left-0 right-0 bg-red-500/20 border-b border-red-500/30 flex items-end justify-center"
                                 style={{ height: spec.safeZoneOverlay.top }}
                             >
-                                <span className="text-[8px] text-red-700 font-medium mb-0.5">Onveilig</span>
+                                <span className="text-[8px] text-red-700 font-medium mb-0.5">Safezone</span>
                             </div>
 
                             {/* Bottom Unsafe Zone */}
@@ -87,7 +87,7 @@ export function AdCard({ spec, isSelected, onToggle }) {
                                 className="absolute bottom-0 left-0 right-0 bg-red-500/20 border-t border-red-500/30 flex items-start justify-center"
                                 style={{ height: spec.safeZoneOverlay.bottom }}
                             >
-                                <span className="text-[8px] text-red-700 font-medium mt-0.5">Onveilig</span>
+                                <span className="text-[8px] text-red-700 font-medium mt-0.5">Safezone</span>
                             </div>
 
                             {/* Left Unsafe Zone */}
