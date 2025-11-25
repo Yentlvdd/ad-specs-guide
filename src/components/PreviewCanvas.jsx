@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { ZoomIn, ZoomOut, Maximize2, Download } from 'lucide-react';
 import html2canvas from 'html2canvas';
 
-export function PreviewCanvas({ children, platformName, specName, specDimensions }) {
+export function PreviewCanvas({ children, platformName, specName, specDimensions, showSafeZones, onToggleSafeZones, hasSafeZones }) {
     const [zoom, setZoom] = useState(100);
     const [downloading, setDownloading] = useState(false);
     const previewRef = useRef(null);
@@ -33,7 +33,7 @@ export function PreviewCanvas({ children, platformName, specName, specDimensions
             });
 
             const link = document.createElement('a');
-            link.download = `${platformName.replace(/\s+/g, '-')}-${specName.replace(/\s+/g, '-')}-mockup.png`;
+            link.download = `${platformName.replace(/\s+/g, '-')} -${specName.replace(/\s+/g, '-')} -mockup.png`;
             link.href = canvas.toDataURL('image/png');
             link.click();
 
@@ -50,8 +50,22 @@ export function PreviewCanvas({ children, platformName, specName, specDimensions
 
     return (
         <div className="relative w-full h-full flex flex-col">
-            {/* Download Button - Top Right (Prominent) */}
-            <div className="absolute top-4 right-4 z-50">
+            {/* Download Button & Safe Zone Toggle - Top Right */}
+            <div className="absolute top-4 right-4 z-50 flex items-center gap-3">
+                {/* Safe Zone Toggle - Only show if spec has safe zones */}
+                {hasSafeZones && (
+                    <div className="flex items-center gap-2 bg-white border rounded-lg shadow-lg px-3 py-2">
+                        <span className="text-xs font-semibold text-muted-foreground">Safe Zones</span>
+                        <button
+                            onClick={onToggleSafeZones}
+                            className={`relative inline - flex h - 6 w - 11 items - center rounded - full transition - colors ${showSafeZones ? 'bg-primary' : 'bg-gray-300'} `}
+                        >
+                            <span className={`inline - block h - 4 w - 4 transform rounded - full bg - white transition - transform ${showSafeZones ? 'translate-x-6' : 'translate-x-1'} `} />
+                        </button>
+                    </div>
+                )}
+
+                {/* Download Button */}
                 <button
                     onClick={handleDownload}
                     disabled={downloading}

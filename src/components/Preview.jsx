@@ -230,19 +230,6 @@ export function Preview({ platform, selectedSpecs, onExit }) {
                                     ))}
                                 </select>
                             </div>
-
-                            {/* Safe Zone Toggle */}
-                            {spec.safeZoneOverlay && (
-                                <div className="flex items-center justify-between p-3 bg-muted/50 rounded-md">
-                                    <label className="text-xs font-semibold uppercase text-muted-foreground">Show Safe Zones</label>
-                                    <button
-                                        onClick={() => setShowSafeZones(!showSafeZones)}
-                                        className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${showSafeZones ? 'bg-primary' : 'bg-gray-300'}`}
-                                    >
-                                        <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${showSafeZones ? 'translate-x-6' : 'translate-x-1'}`} />
-                                    </button>
-                                </div>
-                            )}
                         </div>
                     </div>
                 </div>
@@ -253,6 +240,9 @@ export function Preview({ platform, selectedSpecs, onExit }) {
                         platformName={platform.name}
                         specName={spec.name}
                         specDimensions={spec.dimensions}
+                        showSafeZones={showSafeZones}
+                        onToggleSafeZones={() => setShowSafeZones(!showSafeZones)}
+                        hasSafeZones={!!spec.safeZoneOverlay}
                     >
                         {(() => {
                             const previewProps = {
