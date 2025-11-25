@@ -28,7 +28,7 @@ const ICONS = {
     snapchat: Ghost
 };
 
-export function Layout({ platforms, currentPlatformId, onSelectPlatform, children }) {
+export function Layout({ platforms, currentPlatformId, onSelectPlatform, onTogglePreview, previewMode, children }) {
     return (
         <div className="min-h-screen bg-background flex flex-col md:flex-row">
             {/* Sidebar */}
@@ -81,6 +81,15 @@ export function Layout({ platforms, currentPlatformId, onSelectPlatform, childre
             {/* Main Content */}
             <main className="flex-1 overflow-y-auto h-screen">
                 <div className="container max-w-7xl mx-auto p-6 md:p-10">
+                    {/* Preview Mode Toggle */}
+                    <div className="flex justify-end mb-4">
+                        <button
+                            onClick={onTogglePreview}
+                            className="px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition"
+                        >
+                            {previewMode ? 'Exit Preview' : 'Preview Mode'}
+                        </button>
+                    </div>
                     {children}
                 </div>
             </main>

@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { Layout } from './components/Layout';
 import { PlatformView } from './components/PlatformView';
 import { Overview } from './components/Overview';
+import { Preview } from './components/Preview';
 import { adSpecs } from './data/adSpecs';
 
 function App() {
     const [currentPlatformId, setCurrentPlatformId] = useState('overview');
     const [selectedSpecs, setSelectedSpecs] = useState(new Set());
+    const [previewMode, setPreviewMode] = useState(false);
 
     const toggleSpec = (specId) => {
         const newSelected = new Set(selectedSpecs);
@@ -35,13 +37,24 @@ function App() {
 
     const currentPlatform = adSpecs[currentPlatformId];
 
+    const handleTogglePreview = () => {
+        setPreviewMode(prev => !prev);
+    };
+
     return (
         <Layout
             platforms={adSpecs}
             currentPlatformId={currentPlatformId}
             onSelectPlatform={setCurrentPlatformId}
+            onTogglePreview={handleTogglePreview}
+            previewMode={previewMode}
         >
-            {currentPlatformId === 'overview' ? (
+            {previewMode ? (
+                <Preview
+                    platform={currentPlatform}
+                    selectedSpecs={selectedSpecs}
+                />
+            ) : currentPlatformId === 'overview' ? (
                 <Overview
                     platforms={adSpecs}
                     selectedSpecs={selectedSpecs}
