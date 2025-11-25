@@ -30,9 +30,11 @@ export function Preview({ platform, selectedSpecs, onExit }) {
     }
 
     // Get the first selected spec or default to first spec
-    const spec = Array.from(selectedSpecs).map(id =>
-        platform.specs.find(s => s.id === id)
-    ).find(Boolean) || platform.specs[0];
+    const [selectedFormatIndex, setSelectedFormatIndex] = useState(0);
+
+    // Get available formats for this platform
+    const availableFormats = platform.specs || [];
+    const spec = availableFormats[selectedFormatIndex] || availableFormats[0];
 
     // Common state
     const [imageUrl, setImageUrl] = useState(null);
@@ -117,6 +119,30 @@ export function Preview({ platform, selectedSpecs, onExit }) {
                     </div>
 
                     <div className="space-y-4">
+                        {/* Format Selector - Only show if multiple formats available */}
+                        {availableFormats.length > 1 && (
+                            <div className="bg-muted/30 p-4 rounded-lg border-2 border-primary/20">
+                                <label className="block text-xs font-semibold uppercase text-muted-foreground mb-2">
+                                    Ad Format ({availableFormats.length} options)
+                                </label>
+                                <div className="grid grid-cols-2 gap-2">
+                                    {availableFormats.map((format, index) => (
+                                        <button
+                                            key={format.id}
+                                            onClick={() => setSelectedFormatIndex(index)}
+                                            className={`px-3 py-2 rounded-md text-xs font-semibold transition-all ${selectedFormatIndex === index
+                                                    ? 'bg-primary text-primary-foreground shadow-md'
+                                                    : 'bg-background hover:bg-muted text-muted-foreground'
+                                                }`}
+                                        >
+                                            <div className="font-bold">{format.name}</div>
+                                            <div className="text-[10px] opacity-80">{format.ratio || format.dimensions}</div>
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
                         <div>
                             <label className="block text-xs font-semibold uppercase text-muted-foreground mb-1.5">Profile Image</label>
                             <input
