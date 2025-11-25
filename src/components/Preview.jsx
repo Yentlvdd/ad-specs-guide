@@ -58,7 +58,12 @@ export function Preview({ platform, selectedSpecs, onExit }) {
     };
 
     const handleCopy = () => {
-        const text = `*Advertiser:* ${advertiser}\n*Primary Text:* ${copy}\n*Headline:* ${headline}\n*Website:* ${websiteUrl}\n*Description:* ${linkDescription}\n*CTA:* ${cta}`;
+        const text = `Advertiser: ${advertiser}
+• Primary Text: ${copy}
+• Headline: ${headline}
+• Website: ${websiteUrl}
+• Description: ${linkDescription}
+• CTA: ${cta}`;
         navigator.clipboard.writeText(text);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
@@ -131,8 +136,8 @@ export function Preview({ platform, selectedSpecs, onExit }) {
                                             key={format.id}
                                             onClick={() => setSelectedFormatIndex(index)}
                                             className={`px-3 py-2 rounded-md text-xs font-semibold transition-all ${selectedFormatIndex === index
-                                                    ? 'bg-primary text-primary-foreground shadow-md'
-                                                    : 'bg-background hover:bg-muted text-muted-foreground'
+                                                ? 'bg-primary text-primary-foreground shadow-md'
+                                                : 'bg-background hover:bg-muted text-muted-foreground'
                                                 }`}
                                         >
                                             <div className="font-bold">{format.name}</div>
