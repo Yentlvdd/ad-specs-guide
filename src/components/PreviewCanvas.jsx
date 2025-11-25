@@ -58,9 +58,9 @@ export function PreviewCanvas({ children, platformName, specName, specDimensions
                         <span className="text-xs font-semibold text-muted-foreground">Safe Zones</span>
                         <button
                             onClick={onToggleSafeZones}
-                            className={`relative inline - flex h - 6 w - 11 items - center rounded - full transition - colors ${showSafeZones ? 'bg-primary' : 'bg-gray-300'} `}
+                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${showSafeZones ? 'bg-primary' : 'bg-gray-300'}`}
                         >
-                            <span className={`inline - block h - 4 w - 4 transform rounded - full bg - white transition - transform ${showSafeZones ? 'translate-x-6' : 'translate-x-1'} `} />
+                            <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${showSafeZones ? 'translate-x-6' : 'translate-x-1'}`} />
                         </button>
                     </div>
                 )}
