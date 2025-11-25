@@ -6,29 +6,29 @@ export function Overview({ platforms, selectedSpecs, onToggleSpec, onTogglePlatf
     const [copied, setCopied] = React.useState(false);
 
     const handleCopyAll = () => {
-        // Generate Slack Markdown
-        let markdown = "*Digital Ad Specs Overzicht*\n\n";
+        // Generate plain text with bullets
+        let text = "Digital Ad Specs Overzicht\n\n";
 
         Object.values(platforms).forEach(platform => {
             const platformSpecs = platform.specs.filter(spec => selectedSpecs.has(spec.id));
 
             if (platformSpecs.length > 0) {
-                markdown += `*${platform.name}*\n`;
+                text += `${platform.name}\n`;
                 platformSpecs.forEach(spec => {
-                    markdown += `• *${spec.name}*: \`${spec.dimensions}\` (${spec.ratio})\n`;
+                    text += `• ${spec.name}: ${spec.dimensions} (${spec.ratio})\n`;
                     if (spec.safeZones) {
-                        markdown += `  _Safezone Guardrails: ${spec.safeZones}_\n`;
+                        text += `  Safezone Guardrails: ${spec.safeZones}\n`;
                     }
                 });
-                markdown += "\n";
+                text += "\n";
             }
         });
 
         if (selectedSpecs.size === 0) {
-            markdown += "_Geen plaatsingen geselecteerd._";
+            text += "Geen plaatsingen geselecteerd.";
         }
 
-        navigator.clipboard.writeText(markdown);
+        navigator.clipboard.writeText(text);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
     };
