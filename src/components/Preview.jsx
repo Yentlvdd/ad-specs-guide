@@ -3,9 +3,24 @@
 // of the selected ad format with safe‑zone overlays.
 
 import React, { useState } from 'react';
+import { ArrowLeft } from 'lucide-react';
 import { cn } from '../lib/utils';
 
-export function Preview({ platform, selectedSpecs }) {
+export function Preview({ platform, selectedSpecs, onExit }) {
+    if (!platform) {
+        return (
+            <div className="flex flex-col items-center justify-center h-64 space-y-4">
+                <p className="text-muted-foreground">Please select a platform to preview.</p>
+                <button
+                    onClick={onExit}
+                    className="flex items-center gap-2 text-primary hover:underline"
+                >
+                    <ArrowLeft className="h-4 w-4" />
+                    Back to Overview
+                </button>
+            </div>
+        );
+    }
     // For simplicity we preview the first selected spec (or the first spec of the platform if none selected)
     const spec = Array.from(selectedSpecs).map(id =>
         platform.specs.find(s => s.id === id)
@@ -43,6 +58,13 @@ export function Preview({ platform, selectedSpecs }) {
 
     return (
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <button
+                onClick={onExit}
+                className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-4"
+            >
+                <ArrowLeft className="h-4 w-4" />
+                Back to {platform.name}
+            </button>
             {/* Controls */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-4">

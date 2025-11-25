@@ -82,14 +82,16 @@ export function Layout({ platforms, currentPlatformId, onSelectPlatform, onToggl
             <main className="flex-1 overflow-y-auto h-screen">
                 <div className="container max-w-7xl mx-auto p-6 md:p-10">
                     {/* Preview Mode Toggle */}
-                    <div className="flex justify-end mb-4">
-                        <button
-                            onClick={onTogglePreview}
-                            className="px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition"
-                        >
-                            {previewMode ? 'Exit Preview' : 'Preview Mode'}
-                        </button>
-                    </div>
+                    {currentPlatformId !== 'overview' && (
+                        <div className="flex justify-end mb-4">
+                            <button
+                                onClick={onTogglePreview}
+                                className="px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition"
+                            >
+                                {previewMode ? 'Exit Preview' : 'Preview Mode'}
+                            </button>
+                        </div>
+                    )}
                     {children}
                 </div>
             </main>

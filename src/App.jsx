@@ -53,6 +53,7 @@ function App() {
                 <Preview
                     platform={currentPlatform}
                     selectedSpecs={selectedSpecs}
+                    onExit={handleTogglePreview}
                 />
             ) : currentPlatformId === 'overview' ? (
                 <Overview
