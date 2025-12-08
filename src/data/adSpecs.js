@@ -399,5 +399,43 @@ export const adSpecs = {
                 safeZones: "Boven: 175px, Onder: 269px."
             }
         ]
+    },
+    bvod: {
+        id: 'bvod',
+        name: "BVOD / DPG Media",
+        description: "Broadcaster Video on Demand",
+        bestPractices: [
+            "Gebruik High-Quality Assets (1080p).",
+            "Respecteer de EBU R128 audio standaard (-23 LUFS).",
+            "Denk aan 'Sound-off' voor Outstream (ondertitels).",
+            "Gebruik verticale video's voor mobiele impact."
+        ],
+        specs: [
+            {
+                id: 'bvod-instream',
+                name: "Instream Video (Pre/Mid-roll)",
+                ratio: "16:9",
+                dimensions: "1920 x 1080",
+                type: "video",
+                notes: "25 FPS (progressive) of 50 FPS (interlaced).",
+                safeZones: "Houd rekening met player controls (onderste 10%)."
+            },
+            {
+                id: 'bvod-vertical',
+                name: "Vertical Video (Mobile)",
+                ratio: "9:16",
+                dimensions: "1080 x 1920",
+                type: "video",
+                notes: "Voor in-article en social distributie."
+            },
+            {
+                id: 'bvod-outstream',
+                name: "Outstream Video",
+                ratio: "16:9",
+                dimensions: "1920 x 1080",
+                type: "video",
+                notes: "Start zonder geluid. Ondertiteling verplicht."
+            }
+        ]
     }
 }

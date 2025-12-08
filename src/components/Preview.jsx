@@ -12,6 +12,7 @@ import { SnapchatAdPreview } from './previews/SnapchatAdPreview';
 import { PinterestAdPreview } from './previews/PinterestAdPreview';
 import { YouTubeAdPreview } from './previews/YouTubeAdPreview';
 import { GoogleDisplayAdPreview } from './previews/GoogleDisplayAdPreview';
+import { BVODAdPreview } from './previews/BVODAdPreview';
 
 export function Preview({ platform, selectedSpecs, onExit }) {
     if (!platform) {
@@ -273,6 +274,8 @@ export function Preview({ platform, selectedSpecs, onExit }) {
                                     return <YouTubeAdPreview {...previewProps} />;
                                 case 'google':
                                     return <GoogleDisplayAdPreview {...previewProps} layoutType="medium-rectangle" />;
+                                case 'bvod':
+                                    return <BVODAdPreview {...previewProps} />;
                                 case 'meta':
                                 case 'instagram':
                                 default:
