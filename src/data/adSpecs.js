@@ -437,5 +437,67 @@ export const adSpecs = {
                 notes: "Start zonder geluid. Ondertiteling verplicht."
             }
         ]
+    },
+    pmax: {
+        id: 'pmax',
+        name: "Google Performance Max",
+        description: "All-in-one Google Ads Campaign",
+        bestPractices: [
+            "Upload minaal 5 versies van assets (tekst, beeld, video) voor maximale optimalisatie.",
+            "Gebruik 'lifestyle' beelden die mensen in actie tonen.",
+            "Wissel af met video lengtes (10s, 15s, 30s) en oriëntaties (landschap, vierkant, verticaal).",
+            "Vul alle headlines en descriptions in om de advertentiekracht te verhogen."
+        ],
+        specs: [
+            {
+                id: 'pmax-landscape',
+                name: "Landscape Image",
+                ratio: "1.91:1",
+                dimensions: "1200 x 628",
+                type: "image",
+                notes: "Minimaal 1 vereist, tot 20 aanbevolen. Max 5MB.",
+                safeZones: "Centrale 80% is veilig."
+            },
+            {
+                id: 'pmax-square',
+                name: "Square Image",
+                ratio: "1:1",
+                dimensions: "1200 x 1200",
+                type: "image",
+                notes: "Minimaal 1 vereist, tot 20 aanbevolen. Max 5MB."
+            },
+            {
+                id: 'pmax-portrait',
+                name: "Portrait Image",
+                ratio: "4:5",
+                dimensions: "960 x 1200",
+                type: "image",
+                notes: "Aanbevolen voor mobiele weergave. Max 5MB."
+            },
+            {
+                id: 'pmax-square-logo',
+                name: "Square Logo",
+                ratio: "1:1",
+                dimensions: "1200 x 1200",
+                type: "image",
+                notes: "Minimaal 1 vereist. Transparante achtergrond aanbevolen."
+            },
+            {
+                id: 'pmax-landscape-video',
+                name: "Landscape Video",
+                ratio: "16:9",
+                dimensions: "1920 x 1080",
+                type: "video",
+                notes: "Aanbevolen voor YouTube & Display. 10s-30s."
+            },
+            {
+                id: 'pmax-vertical-video',
+                name: "Vertical Video",
+                ratio: "9:16",
+                dimensions: "1080 x 1920",
+                type: "video",
+                notes: "Aanbevolen voor YouTube Shorts & Mobile."
+            }
+        ]
     }
 }

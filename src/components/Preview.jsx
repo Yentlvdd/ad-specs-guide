@@ -13,6 +13,7 @@ import { PinterestAdPreview } from './previews/PinterestAdPreview';
 import { YouTubeAdPreview } from './previews/YouTubeAdPreview';
 import { GoogleDisplayAdPreview } from './previews/GoogleDisplayAdPreview';
 import { BVODAdPreview } from './previews/BVODAdPreview';
+import { PMaxAdPreview } from './previews/PMaxAdPreview';
 
 export function Preview({ platform, selectedSpecs, onExit }) {
     if (!platform) {
@@ -276,6 +277,8 @@ export function Preview({ platform, selectedSpecs, onExit }) {
                                     return <GoogleDisplayAdPreview {...previewProps} layoutType="medium-rectangle" />;
                                 case 'bvod':
                                     return <BVODAdPreview {...previewProps} />;
+                                case 'pmax':
+                                    return <PMaxAdPreview {...previewProps} />;
                                 case 'meta':
                                 case 'instagram':
                                 default:
